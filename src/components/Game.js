@@ -23,7 +23,10 @@ export default class Game extends Component {
             valorCPU: Math.floor(Math.random() * 3) + 1,
             valorJogador: 0,
             cardCPU: imgCard,
-            mensagem: "...",
+            
+            nomeCardJogador: "???",
+            nomeCardCPU: "???",
+            mensagem: "???",
         }
     }
 
@@ -56,16 +59,21 @@ export default class Game extends Component {
             if(this.state.valorCPU === 1){
                 this.setState({
                     cardCPU: imgCardPedra,
+                    nomeCardCPU: "Pedra",
                 });
             }
 
             else if(this.state.valorCPU === 2){
                     this.setState({
                         cardCPU: imgCardPapel,
+                        nomeCardCPU: "Papel",
                     });
-                }else{
+                }
+                
+                else{
                     this.setState({
                         cardCPU: imgCardTesoura,
+                        nomeCardCPU: "Tesoura",
                     });
                 }
         }
@@ -73,15 +81,15 @@ export default class Game extends Component {
         mudarMensagem(opt){
             if(opt === 1){
                 this.setState({
-                    mensagem: "Resultado: Você Venceu!!"
+                    mensagem: "Você Venceu!!"
                 });
             }else if(opt === 2){
                 this.setState({
-                    mensagem: "Resultado: Empate!!"
+                    mensagem: "Empate!!"
                 });
             }else{
                 this.setState({
-                    mensagem: "Resultado: Você Perdeu!!"
+                    mensagem: "Você Perdeu!!"
                 });
             }
         }
@@ -100,7 +108,7 @@ export default class Game extends Component {
         selecionarCard(opt){
             switch(opt){
                 case 1:
-                    this.setState({ valorJogador: 1 });
+                    this.setState({ valorJogador: 1, nomeCardJogador: "Pedra", nomeCardCPU: "???", cardCPU: imgCard, mensagem: "???"});
                     document.getElementById("card01").style.border  = "3px solid #0000ff";
                     
                     document.getElementById("card02").style.border  = '1px solid #E6E6FA';
@@ -108,7 +116,7 @@ export default class Game extends Component {
                 break;
                 
                 case 2:
-                    this.setState({ valorJogador: 2 });
+                    this.setState({ valorJogador: 2, nomeCardJogador: "Papel", nomeCardCPU: "???", cardCPU: imgCard, mensagem: "???"});
                     document.getElementById("card01").style.border  = '1px solid #E6E6FA';
                     
                     document.getElementById("card02").style.border  = "3px solid #0000ff";
@@ -116,7 +124,7 @@ export default class Game extends Component {
                 break;
 
                 case 3:
-                    this.setState({ valorJogador: 3 });
+                    this.setState({ valorJogador: 3, nomeCardJogador: "Tesoura", nomeCardCPU: "???", cardCPU: imgCard, mensagem: "???" });
                     document.getElementById("card01").style.border  = '1px solid #E6E6FA';
                     
                     document.getElementById("card02").style.border  = '1px solid #E6E6FA';
@@ -171,7 +179,9 @@ export default class Game extends Component {
                 <hr></hr>
                 
                 <div class="row">
-                   <Mensagem mensagemJ={this.state.mensagem}/>
+                   <Mensagem mensagemJ={this.state.mensagem}
+                             nome_card_jogador={this.state.nomeCardJogador}
+                             nome_card_cpu={this.state.nomeCardCPU}/>
                 </div>
             </div>
         );
